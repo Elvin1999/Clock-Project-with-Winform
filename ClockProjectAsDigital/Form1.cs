@@ -14,14 +14,18 @@ namespace ClockProjectAsDigital
         public DateTime london_time { get; set; }
         public DateTime baku_time { get; set; }
         public Label MyClockLabel { get; set; }
+        public string time { get; set; }
         public string imagepath { get; set; }
         public string LabelImage { get; set; }
+        public bool IsClickedToLondonButton { get; set; }
+        public bool IsClickedToBakuButton { get; set; }
         public Form1()
         {
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            IsClickedToBakuButton = true;
             Timer timer = new Timer();
             timer.Interval = 1000;
             timer.Start();
@@ -50,24 +54,38 @@ namespace ClockProjectAsDigital
             Controls.Add(baku_clock_button);
             Controls.Add(london_clock_button);
             MyClockLabel = clocklabel;
-            Controls.Add(clocklabel);        
+            Controls.Add(clocklabel);
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
             baku_time = DateTime.Now;
             baku_time.AddSeconds(1);
-            MyClockLabel.Text = baku_time.ToLongTimeString();
+            london_time = baku_time.AddHours(-4);
+            london_time.AddSeconds(1);
+            time = london_time.ToLongTimeString();//for london
+
+            if (IsClickedToLondonButton)
+            {
+                MyClockLabel.Text = time;
+            }
+            else if (IsClickedToBakuButton)
+            {
+                MyClockLabel.Text = baku_time.ToLongTimeString();
+            }
         }
         private void London_clock_Click(object sender, EventArgs e)
         {
-            london_time = baku_time.AddHours(-4);
-            MyClockLabel.Text = london_time.ToLongTimeString();
+            MyClockLabel.Text = time;
             MyClockLabel.Image = Image.FromFile("london.png");
+            IsClickedToLondonButton = true;
+            IsClickedToBakuButton = false;
         }
         private void Baku_clock_Click(object sender, EventArgs e)
-        {         
+        {
             MyClockLabel.Text = baku_time.ToLongTimeString();
             MyClockLabel.Image = Image.FromFile("baku.png");
+            IsClickedToBakuButton = true;
+            IsClickedToLondonButton = false;
         }
     }
 }
