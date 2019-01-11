@@ -15,13 +15,21 @@ namespace ClockProjectAsDigital
         public DateTime baku_time { get; set; }
         public Label MyClockLabel { get; set; }
         public string time { get; set; }
-        public string imagepath { get; set; }
-        public string LabelImage { get; set; }
         public bool IsClickedToLondonButton { get; set; }
         public bool IsClickedToBakuButton { get; set; }
         public Form1()
         {
             InitializeComponent();
+        }
+        private Button GetButton(string text,int x,int y)
+        {
+            Button button = new Button();
+            button.Size = new Size(85, 30);
+            button.Location = new Point(x, y);
+            button.BackColor = Color.LightBlue;
+            button.Text = text;
+            button.Font = new Font("Italic", 14);
+            return button;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -37,18 +45,8 @@ namespace ClockProjectAsDigital
             clocklabel.Text = DateTime.Now.ToLongTimeString();
             clocklabel.Font = new Font("Imprint MT Shadow", 50);
             clocklabel.Image = Image.FromFile("baku.png");
-            Button baku_clock_button = new Button();
-            Button london_clock_button = new Button();
-            baku_clock_button.Size = new Size(85, 30);
-            london_clock_button.Size = new Size(85, 30);
-            baku_clock_button.Location = new Point(250, 150);
-            london_clock_button.Location = new Point(400, 150);
-            baku_clock_button.BackColor = Color.LightBlue;
-            london_clock_button.BackColor = Color.LightBlue;
-            baku_clock_button.Text = "Baku";
-            london_clock_button.Text = "London";
-            baku_clock_button.Font = new Font("Italic", 14);
-            london_clock_button.Font = new Font("Italic", 14);
+            Button baku_clock_button = GetButton("Baku",250,150);
+            Button london_clock_button = GetButton("London",450,150);         
             baku_clock_button.Click += Baku_clock_Click;
             london_clock_button.Click += London_clock_Click;
             Controls.Add(baku_clock_button);
