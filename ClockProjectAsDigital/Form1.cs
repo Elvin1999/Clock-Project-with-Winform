@@ -61,7 +61,6 @@ namespace ClockProjectAsDigital
             london_time = baku_time.AddHours(-4);
             london_time.AddSeconds(1);
             time = london_time.ToLongTimeString();//for london
-
             if (IsClickedToLondonButton)
             {
                 MyClockLabel.Text = time;
