@@ -44,7 +44,9 @@ namespace ClockProjectAsDigital
             clocklabel.Size = new Size(500, 350);
             clocklabel.Text = DateTime.Now.ToLongTimeString();
             clocklabel.Font = new Font("Imprint MT Shadow", 50);
-            clocklabel.Image = Image.FromFile("baku.png");
+            //clocklabel.Image = Image.FromFile("baku.png");
+            clocklabel.Image = Properties.Resources.baku;
+            
             Button baku_clock_button = GetButton("Baku",250,150);
             Button london_clock_button = GetButton("London",450,150);         
             baku_clock_button.Click += Baku_clock_Click;
@@ -73,14 +75,16 @@ namespace ClockProjectAsDigital
         private void London_clock_Click(object sender, EventArgs e)
         {
             MyClockLabel.Text = time;
-            MyClockLabel.Image = Image.FromFile("london.png");
+            //MyClockLabel.Image = Image.FromFile("london.png");
+            MyClockLabel.Image = Properties.Resources.london;
             IsClickedToLondonButton = true;
             IsClickedToBakuButton = false;
         }
         private void Baku_clock_Click(object sender, EventArgs e)
         {
             MyClockLabel.Text = baku_time.ToLongTimeString();
-            MyClockLabel.Image = Image.FromFile("baku.png");
+            //MyClockLabel.Image = Image.FromFile("baku.png");
+            MyClockLabel.Image = Properties.Resources.baku;
             IsClickedToBakuButton = true;
             IsClickedToLondonButton = false;
         }
